@@ -1,0 +1,50 @@
+name: Deploy React App to FTP Server
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  ftp-deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies and Build
+        run: |
+          echo "Installing dependencies..."
+          npm install --legacy-peer-deps
+          echo "Building application..."
+          npm run build
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          CI: true
+          VITE_API_URL: http://tuabogadoenlinea.free.nf/
+
+      - name: Deploy to FTP Server
+        uses: SamKirkland/FTP-Deploy-Action@4.3.0
+        with:
+          server: c2651511.ferozo.com
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: dist/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules
+            **/.env*
+            **/*.md
+            **/vite.config.js
+            **/.eslintrc*
+            **/.gitignore
+
