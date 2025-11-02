@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://tuabogadoenlinea.free.nf/apis';
+const API_URL = import.meta.env.VITE_API_URL || 'http://tuabogadoenlinea.free.nf/apis/api/';
 
 // Crear instancia de axios
 const api = axios.create({
