@@ -28,7 +28,7 @@ jobs:
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           CI: true
-          VITE_API_URL: http://tuabogadoenlinea.free.nf/
+          VITE_API_URL: http://tuabogadoenlinea.free.nf/apis/api/
 
       - name: Deploy to FTP Server
         uses: SamKirkland/FTP-Deploy-Action@4.3.0
