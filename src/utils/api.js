@@ -1,10 +1,6 @@
 import axios from 'axios';
 
-// En desarrollo, usar el proxy de Vite (/api)
-// En producción, usar la URL completa
-const isDevelopment = import.meta.env.DEV;
-const API_URL = import.meta.env.VITE_API_URL || 
-  (isDevelopment ? '/api' : 'http://tuabogadoenlinea.free.nf/apis');
+const API_URL = import.meta.env.VITE_API_URL || 'http://tuabogadoenlinea.free.nf/apis';
 
 // Crear instancia de axios
 const api = axios.create({
